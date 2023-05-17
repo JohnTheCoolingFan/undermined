@@ -94,6 +94,7 @@ public record RandomSpreadOreVeinPlacement(int spacing, int separation, float ra
     private static final int OFFSETS_DIVISIONS = 36;
     private static final float OFFSET_RANGE = TAU / OFFSETS_DIVISIONS;
 
+    // I'm not sure whether this works correctly or not, need to be tested
     private float getContinuousAngleOffset(WorldgenRandom worldgenRandom, float angle) {
         List<Float> offsets = new ArrayList<>();
 
