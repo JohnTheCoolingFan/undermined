@@ -14,8 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @param spacing controls spacing between regions
- * @param separation controls how separated veins are
+ * @param spacing spacing between region origins, defines a "grid" size
+ * @param separation minimum distance between features
  * @param radius controls cutoff radius
  * @param spreadType ore vein spreading type
  * @param salt randomness salt
