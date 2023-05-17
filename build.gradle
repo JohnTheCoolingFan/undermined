@@ -1,23 +1,10 @@
-buildscript {
-    repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://maven.parchmentmc.org' }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-    }
-}
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 plugins {
     id 'eclipse'
     id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-
 
 version = '1.0'
 group = 'ru.jtcf.undermined' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -160,6 +147,10 @@ repositories {
         url = "https://modmaven.dev"
     }
     maven {
+        name = "JourneyMap (Public)"
+        url = "https://jm.gserv.me/repository/maven-public/"
+    }
+    maven {
         url = "https://www.cursemaven.com"
     }
 }
@@ -193,6 +184,9 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:cofh-core-69162:4385215")
     runtimeOnly fg.deobf("curse.maven:thermal-foundation-222880:4382339")
     runtimeOnly fg.deobf("curse.maven:thermal-expansion-69163:4382343")
+    // For visualizing chunk data (ore veins)
+    compileOnly fg.deobf(group: 'info.journeymap', name: 'journeymap-api', version: journeymap_api_version)
+    runtimeOnly fg.deobf("curse.maven:journeymap-32274:4532901")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
