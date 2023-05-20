@@ -114,7 +114,7 @@ public record OreVeinFeatureConfiguration(int spacing, int separation, float rad
 
         int baseValueWithDeviation = this.baseValue() + worldgenRandom.nextInt(this.valueDeviation());
         float valueScaledByDistance = baseValueWithDeviation * Math.max(0.0f, 1.0f - distance / this.falloffRate());
-        return (int)(valueScaledByDistance * angleOffset);
+        return (int) (valueScaledByDistance * angleOffset);
     }
 
     private static final int OFFSETS_DIVISIONS = 36;
