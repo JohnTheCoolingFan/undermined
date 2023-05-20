@@ -13,6 +13,7 @@ import net.minecraft.world.phys.Vec2;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: move more generation values into here so this can be used as feature spread
 /**
  * @param spacing spacing between region origins, defines a "grid" size
  * @param separation minimum distance between features
@@ -41,7 +42,7 @@ public record RandomSpreadOreVeinPlacement(int spacing, int separation, float ra
                                     ExtraCodecs.NON_NEGATIVE_INT
                                             .fieldOf("salt")
                                             .forGetter(RandomSpreadOreVeinPlacement::salt))
-                            .apply(builder, RandomSpreadOreVeinPlacement::new))
+                                .apply(builder, RandomSpreadOreVeinPlacement::new))
                     .flatXmap((spread) -> spread.spacing <= spread.separation ?
                                     DataResult.error("Spacing has to be larger than separation") :
                                     DataResult.success(spread),
