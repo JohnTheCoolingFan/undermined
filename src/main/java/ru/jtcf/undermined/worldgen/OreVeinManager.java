@@ -23,7 +23,7 @@ public class OreVeinManager extends SavedData {
             throw new RuntimeException("Access on client-side is not allowed!");
         }
 
-        DimensionDataStorage storage = ((ServerLevel)level).getDataStorage();
+        DimensionDataStorage storage = ((ServerLevel) level).getDataStorage();
 
         return storage.computeIfAbsent(OreVeinManager::new, OreVeinManager::new, "ore_vein_manager");
     }
@@ -39,7 +39,8 @@ public class OreVeinManager extends SavedData {
         });
     }
 
-    public OreVeinManager() {}
+    public OreVeinManager() {
+    }
 
     public OreVeinManager(CompoundTag nbt) {
         ListTag veins = nbt.getList("veins", Tag.TAG_COMPOUND);
