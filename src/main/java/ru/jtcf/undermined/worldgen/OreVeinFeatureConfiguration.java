@@ -1,4 +1,4 @@
-package ru.jtcf.undermined;
+package ru.jtcf.undermined.worldgen;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
