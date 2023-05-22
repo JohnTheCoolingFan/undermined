@@ -1,0 +1,8 @@
+{
+    "feature": "undermined:ore_vein_configured",
+    "placement": [
+        {
+            "type": "minecraft:in_square"
+        }
+    ]
+}

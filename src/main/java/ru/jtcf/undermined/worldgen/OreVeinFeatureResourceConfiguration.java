@@ -33,7 +33,7 @@ public record OreVeinFeatureResourceConfiguration(float radius, float radiusDevi
                                             .fieldOf("radius")
                                             .forGetter(OreVeinFeatureResourceConfiguration::radius),
                                     Codec.floatRange(0.0f, 1.0f)
-                                            .fieldOf("radius_deviation")
+                                            .optionalFieldOf("radius_deviation", 1.0f)
                                             .forGetter(OreVeinFeatureResourceConfiguration::radiusDeviation),
                                     Codec.floatRange(1.0f, 4096.0f)
                                             .optionalFieldOf("falloff_rate", 1.0f)
@@ -45,7 +45,7 @@ public record OreVeinFeatureResourceConfiguration(float radius, float radiusDevi
                                             .fieldOf("base_value")
                                             .forGetter(OreVeinFeatureResourceConfiguration::baseValue),
                                     Codec.intRange(0, 4096)
-                                            .fieldOf("value_deviation")
+                                            .optionalFieldOf("value_deviation", 0)
                                             .forGetter(OreVeinFeatureResourceConfiguration::valueDeviation),
                                     Codec.floatRange(0.0f, 1.0f)
                                             .optionalFieldOf("angle_influence", 1.0f)

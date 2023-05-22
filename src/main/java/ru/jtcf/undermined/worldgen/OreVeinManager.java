@@ -29,11 +29,13 @@ public class OreVeinManager extends SavedData {
     }
 
     @Nullable
-    public OreVein getVein(long seed, ChunkPos pos, OreVeinFeatureConfiguration config) {
+    public OreVein getVein(long seed, ChunkPos pos, @Nullable OreVeinFeatureConfiguration config) {
         return veinMap.computeIfAbsent(pos, cp -> {
-            OreVein vein = config.getVeinForChunk(seed, cp);
-            if (vein.value() > 0) {
-                return vein;
+            if (config != null) {
+                OreVein vein = config.getVeinForChunk(seed, cp);
+                if (vein.value() > 0) {
+                    return vein;
+                }
             }
             return null;
         });

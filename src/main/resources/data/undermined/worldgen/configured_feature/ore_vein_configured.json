@@ -1,0 +1,15 @@
+{
+    "type": "undermined:ore_vein",
+    "config": {
+        "spacing": 10,
+        "separation": 5,
+        "salt": 14741,
+        "resources": {
+            "minecraft:iron_ore": {
+                "radius": 2.0,
+                "base_value": 128,
+                "weight": 100
+            }
+        }
+    }
+}
