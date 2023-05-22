@@ -46,8 +46,7 @@ public class UnderMined {
     @SubscribeEvent
     public static void onBiomeLoadingEvent(BiomeLoadingEvent event) {
         event.getGeneration()
-                .getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES)
-                .add(Holder.Reference.createStandAlone(
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, Holder.Reference.createStandAlone(
                         BuiltinRegistries.PLACED_FEATURE,
                         ResourceKey.create(
                                 BuiltinRegistries.PLACED_FEATURE.key(),
