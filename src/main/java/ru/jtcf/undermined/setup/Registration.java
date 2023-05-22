@@ -3,6 +3,7 @@ package ru.jtcf.undermined.setup;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -16,6 +17,7 @@ public class Registration {
     public final static DeferredRegister<Item> ITEMS = createDeferredRegister(ForgeRegistries.ITEMS);
     public final static DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             createDeferredRegister(ForgeRegistries.BLOCK_ENTITIES);
+    public final static DeferredRegister<Feature<?>> FEATURES = createDeferredRegister(ForgeRegistries.FEATURES);
 
     private static <T extends IForgeRegistryEntry<T>> DeferredRegister<T> createDeferredRegister(IForgeRegistry<T> registry) {
         return DeferredRegister.create(registry, UnderMined.MODID);
@@ -27,10 +29,12 @@ public class Registration {
         BLOCKS.register(modEventBus);
         ITEMS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
+        FEATURES.register(modEventBus);
 
         ModBlocks.register();
         ModItems.register();
         ModCapabilities.register();
         ModBlockEntityTypes.register();
+        ModWorldgen.register();
     }
 }
