@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * @param resources  A map of resource to its generation configuration.
+ * @param spacing    Spacing between region origins. One resource per region
+ * @param separation Separation between resource vein origin chunk and any of the region origins.
+ * @param salt       Randomness salt.
+ */
 public record OreVeinFeatureConfiguration(Map<ResourceLocation, OreVeinFeatureResourceConfiguration> resources,
                                           int spacing, int separation, int salt) implements FeatureConfiguration {
     public static final Codec<OreVeinFeatureConfiguration> CODEC =
