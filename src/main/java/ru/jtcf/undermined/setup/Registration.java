@@ -20,6 +20,8 @@ public class Registration {
     public final static DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             createDeferredRegister(ForgeRegistries.BLOCK_ENTITIES);
     public final static DeferredRegister<Feature<?>> FEATURES = createDeferredRegister(ForgeRegistries.FEATURES);
+    // TODO: use KubeJS to set veins and placements
+    // TODO: Provide defaults
     public final static DeferredRegister<ResourceVeinResourceConfiguration> RESOURCE_VEINS =
             DeferredRegister.create(new ResourceLocation("undermined", "ore_veins"), "undermined");
     public final static Supplier<IForgeRegistry<ResourceVeinResourceConfiguration>> RESOURCE_VEINS_REGISTRY_SUPPLIER
