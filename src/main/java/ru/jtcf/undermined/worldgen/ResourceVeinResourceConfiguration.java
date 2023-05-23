@@ -69,20 +69,45 @@ public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<
         Vec2 chunkOffset = new Vec2(chunk.x, chunk.z).add(new Vec2(featureChunk.x, featureChunk.z).negated());
 
         float distance = chunkOffset.length();
-        float radiusOffset = this.radius() * (1.0f + random.nextFloat(this.radiusDeviation()));
+
+        float radiusRandomOffset;
+        if (this.radiusDeviation > 0.0f) {
+            radiusRandomOffset = 1.0f + random.nextFloat(this.radiusDeviation);
+        } else {
+            radiusRandomOffset = 1.0f;
+        }
+
+        float radiusOffset = this.radius() * radiusRandomOffset;
+
         if (distance > radiusOffset) {
             return 0;
         }
-        float scaled_dot = Vec2.UNIT_X.dot(chunkOffset) / distance;
+        float raw_dot = Vec2.UNIT_X.dot(chunkOffset);
+        if (Float.isNaN(raw_dot)) {
+            raw_dot = 0.0f;
+        }
+        float scaled_dot = raw_dot / distance;
         float angle = (float) Math.acos(scaled_dot);
         // The offset is below X axis, flip the angle (so that it extends beyond 180 degrees
         angle = chunkOffset.y < 0.0 ? TAU - angle : angle;
 
         //float angleOffset = this.getAngleOffset(seed, regionX, regionZ, angle);
-        float angleOffset = this.getContinuousAngleOffset(random, angle) * this.angleInfluence();
+        float angleOffset = this.getContinuousAngleOffset(random, angle) * (1.0f + this.angleInfluence());
 
-        int baseValueWithDeviation = this.baseValue() + random.nextInt(this.valueDeviation());
-        float valueScaledByDistance = baseValueWithDeviation * Math.max(0.0f, 1.0f - distance / this.falloffRate());
+        if (Float.isNaN(angleOffset)) {
+            angleOffset = 1.0f;
+        }
+
+        int baseValueDeviation;
+        if (this.valueDeviation > 0) {
+            baseValueDeviation = random.nextInt(this.valueDeviation);
+        } else {
+            baseValueDeviation = 0;
+        }
+
+        int baseValueWithDeviation = this.baseValue() + baseValueDeviation;
+        float valueScaledByDistance = baseValueWithDeviation * Math.max(0.0f,
+                1.0f - (distance / this.falloffRate()) / this.radius);
         return (int) (valueScaledByDistance * angleOffset);
     }
 
@@ -132,7 +157,7 @@ public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<
             offsets.add(worldgenRandom.nextFloat(-1.0f, 1.0f));
         }
 
-        int offsetIndexLower = (int) Math.floor(OFFSETS_DIVISIONS * (TAU / angle));
+        int offsetIndexLower = (int) Math.floor(OFFSETS_DIVISIONS * (angle / TAU));
         int offsetIndexUpper = offsetIndexLower < OFFSETS_DIVISIONS - 1 ? offsetIndexLower + 1 : 0;
         float remainder = angle % offsetIndexLower;
         float baseline = offsets.get(offsetIndexLower);
