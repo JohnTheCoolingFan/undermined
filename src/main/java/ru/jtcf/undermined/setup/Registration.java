@@ -49,5 +49,6 @@ public class Registration {
         ModItems.register();
         ModCapabilities.register();
         ModBlockEntityTypes.register();
+        ModWorldgen.register();
     }
 }
