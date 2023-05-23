@@ -42,6 +42,8 @@ public class Registration {
         ITEMS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
         FEATURES.register(modEventBus);
+        RESOURCE_VEINS.register(modEventBus);
+        RESOURCE_VEIN_PLACEMENTS.register(modEventBus);
 
         ModBlocks.register();
         ModItems.register();
