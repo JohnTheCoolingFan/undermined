@@ -14,7 +14,6 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.registries.RegistryObject;
 import ru.jtcf.undermined.setup.Registration;
-import ru.jtcf.undermined.setup.ModBlocks;
 
 import java.util.List;
 import java.util.Map;

@@ -2,10 +2,8 @@ package ru.jtcf.undermined.data;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
-import net.minecraft.tags.BlockTags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import ru.jtcf.undermined.UnderMined;
-import ru.jtcf.undermined.setup.ModBlocks;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
     public ModBlockTagsProvider(DataGenerator pGenerator, ExistingFileHelper existingFileHelper) {
