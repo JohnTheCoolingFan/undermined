@@ -23,7 +23,7 @@ public class ScanMapItemSavedData extends SavedData {
     private static final Logger LOGGER = LogUtils.getLogger();
     public final int x;
     public final int z;
-    public final byte scale;
+    public byte scale;
     private static final int MAP_SIZE = 128;
     private static final int HALF_MAP_SIZE = 64;
     public static final byte MAX_SCALE = 4;

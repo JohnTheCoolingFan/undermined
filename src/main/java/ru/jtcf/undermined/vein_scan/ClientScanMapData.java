@@ -11,7 +11,13 @@ public class ClientScanMapData {
     private static final Map<String, ScanMapItemSavedData> scanData = new HashMap<>();
 
     public static void set(int scanId, byte scale, Map<Pair<Integer, Integer>, ResourceVein> veins) {
-        scanData.computeIfAbsent(ScanMapItem.makeScanKey(scanId),
-                (sId) -> ScanMapItemSavedData.createForClient(scale, veins));
+        String scanIdKey = ScanMapItem.makeScanKey(scanId);
+        if (scanData.containsKey(scanIdKey)) {
+            ScanMapItemSavedData recordedScanData = scanData.get(scanIdKey);
+            recordedScanData.scale = scale;
+            recordedScanData.veins = veins;
+        } else {
+            scanData.put(scanIdKey, ScanMapItemSavedData.createForClient(scale, veins));
+        }
     }
 }
