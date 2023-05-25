@@ -28,6 +28,7 @@ public class UnderMined {
         MinecraftForge.EVENT_BUS.register(ResourceVeinManager.class);
     }
 
+    // Debug print but in-game
     @SubscribeEvent
     public static void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
         ServerLevel level = Minecraft.getInstance().getSingleplayerServer().overworld();
