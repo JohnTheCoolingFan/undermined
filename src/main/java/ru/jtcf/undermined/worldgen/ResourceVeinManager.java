@@ -12,7 +12,6 @@ import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.storage.DimensionDataStorage;
 import net.minecraftforge.event.world.ChunkEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -66,7 +65,7 @@ public class ResourceVeinManager extends SavedData {
                 Collection<ResourceVeinResourceConfiguration> resourceConfigs =
                         Registration.RESOURCE_VEINS_REGISTRY_SUPPLIER.get().getValues();
                 ResourceVein vein = config.getVeinForChunk(seed, cp, resourceConfigs);
-                if (vein.value() > 0) {
+                if (vein != null && vein.value() > 0) {
                     return vein;
                 }
             }
@@ -80,11 +79,10 @@ public class ResourceVeinManager extends SavedData {
     public ResourceVeinManager(CompoundTag nbt) {
         ListTag veins = nbt.getList("veins", Tag.TAG_COMPOUND);
         for (Tag t : veins) {
-            CompoundTag vein = (CompoundTag) t;
-            int veinValue = vein.getInt("value");
-            ResourceLocation resource = new ResourceLocation(vein.getString("resource"));
-            ChunkPos pos = new ChunkPos(vein.getInt("x"), vein.getInt("z"));
-            veinMap.put(pos, new ResourceVein(veinValue, resource));
+            CompoundTag veinTag = (CompoundTag) t;
+            ChunkPos pos = new ChunkPos(veinTag.getInt("x"), veinTag.getInt("z"));
+            ResourceVein vein = new ResourceVein(veinTag);
+            veinMap.put(pos, vein);
         }
     }
 
@@ -96,8 +94,7 @@ public class ResourceVeinManager extends SavedData {
             CompoundTag veinTag = new CompoundTag();
             veinTag.putInt("x", pos.x);
             veinTag.putInt("z", pos.z);
-            veinTag.putInt("value", vein.value());
-            veinTag.putString("resource", vein.resource().toString());
+            vein.save(veinTag);
             veins.add(veinTag);
         });
         pCompoundTag.put("veins", veins);

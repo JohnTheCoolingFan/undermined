@@ -3,25 +3,21 @@ package ru.jtcf.undermined.worldgen;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.util.random.Weight;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.structure.placement.RandomSpreadType;
 import net.minecraft.world.phys.Vec2;
 import net.minecraftforge.registries.ForgeRegistryEntry;
-import net.minecraftforge.registries.IForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- *
- */
 public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<ResourceVeinResourceConfiguration> {
-    private static final float TAU = (float) Math.PI * 2.0f;
+    private static final float TAU = Mth.TWO_PI;
 
     public static final Codec<ResourceVeinResourceConfiguration> CODEC =
             RecordCodecBuilder.<ResourceVeinResourceConfiguration>mapCodec((builder) -> builder.group(
@@ -58,7 +54,8 @@ public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<
                             .apply(builder, ResourceVeinResourceConfiguration::new))
                     .codec();
 
-    public int getValue(WorldgenRandom random, int offsetLimit, ChunkPos chunk, int regionX, int regionZ, int spacing) {
+    @Nullable
+    public ResourceVein getVein(WorldgenRandom random, int offsetLimit, ChunkPos chunk, int regionX, int regionZ, int spacing) {
         // Get offsets on X and Z from the region coordinates
         int offsetX = this.spreadType().evaluate(random, offsetLimit);
         int offsetZ = this.spreadType().evaluate(random, offsetLimit);
@@ -80,7 +77,7 @@ public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<
         float radiusOffset = this.radius() * radiusRandomOffset;
 
         if (distance > radiusOffset) {
-            return 0;
+            return null;
         }
         float raw_dot = Vec2.UNIT_X.dot(chunkOffset);
         if (Float.isNaN(raw_dot)) {
@@ -108,7 +105,8 @@ public final class ResourceVeinResourceConfiguration extends ForgeRegistryEntry<
         int baseValueWithDeviation = this.baseValue() + baseValueDeviation;
         float valueScaledByDistance = baseValueWithDeviation * Math.max(0.0f,
                 1.0f - (distance / this.falloffRate()) / this.radius);
-        return (int) (valueScaledByDistance * angleOffset);
+        int value = (int) (valueScaledByDistance * angleOffset);
+        return new ResourceVein(value, resource(), featureChunk == chunk);
     }
 
     private static final int OFFSETS_DIVISIONS = 36;

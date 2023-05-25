@@ -13,12 +13,10 @@ import net.minecraft.world.level.levelgen.LegacyRandomSource;
 import net.minecraft.world.level.levelgen.WorldgenRandom;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.checkerframework.checker.nullness.qual.NonNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-/**
- *
- */
 public final class ResourceVeinPlacementConfiguration extends ForgeRegistryEntry<ResourceVeinPlacementConfiguration> {
     public static final Codec<ResourceVeinPlacementConfiguration> CODEC =
             RecordCodecBuilder.<ResourceVeinPlacementConfiguration>mapCodec((builder) -> builder.group(
@@ -56,6 +54,7 @@ public final class ResourceVeinPlacementConfiguration extends ForgeRegistryEntry
         this.salt = salt;
     }
 
+    @Nullable
     public ResourceVein getVeinForChunk(long seed, ChunkPos chunk,
                                         Collection<ResourceVeinResourceConfiguration> resourceConfigs) {
         // Get spacing and separation as variables
@@ -71,12 +70,9 @@ public final class ResourceVeinPlacementConfiguration extends ForgeRegistryEntry
         int offsetLimit = spacing - separation;
 
         WeightedResourceConfig selectedResource = getRandomResourceConfig(worldgenRandom, resourceConfigs);
-        ResourceLocation resource = selectedResource.config.resource();
         ResourceVeinResourceConfiguration resourceConfig = selectedResource.config;
 
-        int value = resourceConfig.getValue(worldgenRandom, offsetLimit, chunk, regionX, regionZ, spacing);
-
-        return new ResourceVein(value, resource);
+        return resourceConfig.getVein(worldgenRandom, offsetLimit, chunk, regionX, regionZ, spacing);
     }
 
     private WeightedResourceConfig getRandomResourceConfig(Random random,
