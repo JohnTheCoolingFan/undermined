@@ -11,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
@@ -34,6 +35,10 @@ public class ScanMapItemSavedData extends SavedData {
         this.x = x;
         this.z = z;
         this.setDirty();
+    }
+
+    public static ScanMapItemSavedData createFresh(MapItemSavedData mapData) {
+        return new ScanMapItemSavedData(mapData.x, mapData.z, mapData.scale);
     }
 
     public static ScanMapItemSavedData load(CompoundTag nbt) {
@@ -88,6 +93,14 @@ public class ScanMapItemSavedData extends SavedData {
         return new ScanMapItemSavedData(x, z, scale);
     }
 
+    public static int getFreeScanId(Level level) {
+        if (level instanceof ServerLevel serverLevel) {
+            return ScanIndex.get(serverLevel).getFreeScanId();
+        } else {
+            return 0;
+        }
+    }
+
     public static ScanMapItemSavedData createForClient(byte scale, Map<Pair<Integer, Integer>, ResourceVein> veins) {
         return new ScanMapItemSavedData(0, 0, scale);
     }
@@ -101,6 +114,14 @@ public class ScanMapItemSavedData extends SavedData {
             return getFromClient(clientLevel, scanId);
         }
         return null;
+    }
+
+    public static void set(Level level, ScanMapItemSavedData data, String scanId) {
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.getServer().overworld().getDataStorage().set(scanId, data);
+        } else if (level instanceof ClientLevel clientLevel) {
+            ClientScanMapData.set(scanId, data);
+        }
     }
 
     @Nullable
