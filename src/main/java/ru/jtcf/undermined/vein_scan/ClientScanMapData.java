@@ -1,6 +1,8 @@
 package ru.jtcf.undermined.vein_scan;
 
 import com.mojang.datafixers.util.Pair;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 import ru.jtcf.undermined.item.ScanMapItem;
 import ru.jtcf.undermined.worldgen.ResourceVein;
@@ -8,6 +10,7 @@ import ru.jtcf.undermined.worldgen.ResourceVein;
 import java.util.HashMap;
 import java.util.Map;
 
+@OnlyIn(Dist.CLIENT)
 public class ClientScanMapData {
     private static final Map<String, ScanMapItemSavedData> scanData = new HashMap<>();
 
