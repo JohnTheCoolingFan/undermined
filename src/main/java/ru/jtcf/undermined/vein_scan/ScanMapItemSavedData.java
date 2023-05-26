@@ -100,7 +100,9 @@ public class ScanMapItemSavedData extends SavedData {
     }
 
     public static ScanMapItemSavedData createForClient(byte scale, Map<Pair<Integer, Integer>, ResourceVein> veins) {
-        return new ScanMapItemSavedData(0, 0, scale);
+        ScanMapItemSavedData newData = new ScanMapItemSavedData(0, 0, scale);
+        newData.veins = veins;
+        return newData;
     }
 
     // TODO networking
