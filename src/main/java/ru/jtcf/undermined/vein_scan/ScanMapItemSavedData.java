@@ -25,8 +25,6 @@ public class ScanMapItemSavedData extends SavedData {
     public final int x;
     public final int z;
     public byte scale;
-    private static final int MAP_SIZE = 128;
-    private static final int HALF_MAP_SIZE = 64;
     public static final byte MAX_SCALE = 4;
     public Map<Pair<Integer, Integer>, ResourceVein> veins = new HashMap<>();
 
@@ -110,8 +108,8 @@ public class ScanMapItemSavedData extends SavedData {
     public static ScanMapItemSavedData get(Level level, String scanId) {
         if (level instanceof ServerLevel serverLevel) {
             return getFromServer(serverLevel, scanId);
-        } else if (level instanceof ClientLevel clientLevel) {
-            return getFromClient(clientLevel, scanId);
+        } else if (level instanceof ClientLevel) {
+            return getFromClient(scanId);
         }
         return null;
     }
@@ -119,7 +117,7 @@ public class ScanMapItemSavedData extends SavedData {
     public static void set(Level level, ScanMapItemSavedData data, String scanId) {
         if (level instanceof ServerLevel serverLevel) {
             serverLevel.getServer().overworld().getDataStorage().set(scanId, data);
-        } else if (level instanceof ClientLevel clientLevel) {
+        } else if (level instanceof ClientLevel) {
             ClientScanMapData.set(scanId, data);
         }
     }
@@ -130,7 +128,7 @@ public class ScanMapItemSavedData extends SavedData {
     }
 
     @Nullable
-    public static ScanMapItemSavedData getFromClient(ClientLevel level, String scanId) {
+    public static ScanMapItemSavedData getFromClient(String scanId) {
         return ClientScanMapData.get(scanId);
     }
 }
