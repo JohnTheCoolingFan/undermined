@@ -110,7 +110,6 @@ public class ScanMapItemSavedData extends SavedData {
 
     @Nullable
     public static ScanMapItemSavedData getFromClient(ClientLevel level, String scanId) {
-        // TODO this + networking
-        return null;
+        return ClientScanMapData.get(scanId);
     }
 }

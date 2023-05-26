@@ -1,6 +1,7 @@
 package ru.jtcf.undermined.vein_scan;
 
 import com.mojang.datafixers.util.Pair;
+import org.jetbrains.annotations.Nullable;
 import ru.jtcf.undermined.item.ScanMapItem;
 import ru.jtcf.undermined.worldgen.ResourceVein;
 
@@ -19,5 +20,14 @@ public class ClientScanMapData {
         } else {
             scanData.put(scanIdKey, ScanMapItemSavedData.createForClient(scale, veins));
         }
+    }
+
+    public static void set(String scanId, ScanMapItemSavedData data) {
+        scanData.put(scanId, data);
+    }
+
+    @Nullable
+    public static ScanMapItemSavedData get(String scanId) {
+        return scanData.get(scanId);
     }
 }
