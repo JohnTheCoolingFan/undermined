@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iBi",
+    "did",
+    "ndn"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_block"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "d": {
+      "item": "minecraft:diamond"
+    },
+    "n": {
+      "item": "minecraft:netherite_ingot"
+    }
+  },
+  "result": {
+    "item": "undermined:bore_head"
+  }
+}

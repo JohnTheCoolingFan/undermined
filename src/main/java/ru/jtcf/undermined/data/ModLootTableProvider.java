@@ -13,6 +13,7 @@ import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.registries.RegistryObject;
+import ru.jtcf.undermined.setup.ModBlocks;
 import ru.jtcf.undermined.setup.Registration;
 
 import java.util.List;
@@ -42,9 +43,7 @@ public class ModLootTableProvider extends LootTableProvider {
     public static class ModBlockLootTables extends BlockLoot {
         @Override
         protected void addTables() {
-            //dropSelf(ModBlocks.PIPE_REGULAR.get());
-            //dropSelf(ModBlocks.PIPE_SMART.get());
-            //dropSelf(ModBlocks.NETWORK_INTERFACE.get());
+            dropSelf(ModBlocks.BORE_HEAD.get());
         }
 
         @Override

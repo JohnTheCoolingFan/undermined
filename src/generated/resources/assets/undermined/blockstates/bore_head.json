@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "undermined:block/bore_head",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "undermined:block/bore_head"
+    },
+    "facing=north": {
+      "model": "undermined:block/bore_head",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "undermined:block/bore_head",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "undermined:block/bore_head",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "undermined:block/bore_head",
+      "x": 90,
+      "y": 90
+    }
+  }
+}
