@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BoreHeadBlock extends DirectionalBlock {
     public BoreHeadBlock() {
-        super(Properties.of(Material.METAL).strength(5, 10).sound(SoundType.METAL));
+        super(Properties.of(Material.METAL).strength(5, 10).sound(SoundType.METAL).noOcclusion());
     }
 
     @Nullable
