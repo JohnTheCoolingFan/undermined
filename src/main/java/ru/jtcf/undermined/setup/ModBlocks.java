@@ -5,6 +5,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.RegistryObject;
 import ru.jtcf.undermined.block.bore_head.BoreHeadBlock;
+import ru.jtcf.undermined.block.vein_scanner.VeinScannerBlock;
 
 import java.util.function.Supplier;
 
@@ -12,6 +13,7 @@ public class ModBlocks {
     //public static final RegistryObject<PipeRegularBlock> PIPE_REGULAR = register("pipe_regular", PipeRegularBlock::new);
 
     public static final RegistryObject<BoreHeadBlock> BORE_HEAD = register("bore_head", BoreHeadBlock::new);
+    public static final RegistryObject<VeinScannerBlock> VEIN_SCANNER = register("vein_scanner", VeinScannerBlock::new);
 
     static void register() {
     }

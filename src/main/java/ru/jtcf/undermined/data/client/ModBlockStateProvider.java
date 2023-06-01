@@ -14,5 +14,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         directionalBlock(ModBlocks.BORE_HEAD.get(), models().getExistingFile(modLoc("block/bore_head")));
+        horizontalBlock(ModBlocks.VEIN_SCANNER.get(), models().getExistingFile(modLoc("block/vein_scanner")));
     }
 }

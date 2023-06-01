@@ -14,6 +14,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        withExistingParent("bore_head", modLoc("block/bore_head"));
+        withExistingParent("vein_scanner", modLoc("block/vein_scanner"));
+
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
     }
 

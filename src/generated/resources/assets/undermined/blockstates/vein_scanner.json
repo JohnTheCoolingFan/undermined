@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "undermined:block/vein_scanner"
+    },
+    "facing=south": {
+      "model": "undermined:block/vein_scanner",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "undermined:block/vein_scanner",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "undermined:block/vein_scanner",
+      "y": 90
+    }
+  }
+}
