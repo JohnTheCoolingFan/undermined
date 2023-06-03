@@ -2,6 +2,7 @@ package ru.jtcf.undermined;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,7 +32,12 @@ public class UnderMined {
     // Debug print but in-game
     @SubscribeEvent
     public static void onRenderGameOverlayText(RenderGameOverlayEvent.Text event) {
-        ServerLevel level = Minecraft.getInstance().getSingleplayerServer().overworld();
+        IntegratedServer integratedServer = Minecraft.getInstance().getSingleplayerServer();
+        if (integratedServer == null) {
+            event.getRight().add("Sorry, debug resource vein exploring isn't available in multiplayer, use a scan map");
+            return;
+        }
+        ServerLevel level = integratedServer.overworld();
         ResourceVeinManager manager = ResourceVeinManager.get(level);
         ResourceVein vein = manager.getVein(level.getSeed(), Minecraft.getInstance().player.chunkPosition(), null);
         if (vein != null) {
