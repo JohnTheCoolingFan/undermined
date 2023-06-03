@@ -1,4 +1,4 @@
-package ru.jtcf.undermined.networking;
+package ru.jtcf.undermined.network;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -7,7 +7,7 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 import ru.jtcf.undermined.UnderMined;
-import ru.jtcf.undermined.networking.packets.PacketSyncScanMapDataToClient;
+import ru.jtcf.undermined.network.packets.PacketSyncScanMapDataToClient;
 
 public class Messages {
 

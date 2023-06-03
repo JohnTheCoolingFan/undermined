@@ -1,4 +1,4 @@
-package ru.jtcf.undermined.networking.packets;
+package ru.jtcf.undermined.network.packets;
 
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.FriendlyByteBuf;
